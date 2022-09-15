@@ -2,6 +2,7 @@ import type { NextPage } from "next"
 import Head from "next/head"
 import { useRouter } from "next/router"
 import Card from "../components/Card"
+import Header from "../components/Header"
 
 const Home: NextPage = () => {
   const router = useRouter()
@@ -13,14 +14,16 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Create T3 App</title>
+        <title>Rick&apos;n Morty App</title>
         <meta name="description" content="Rick'n Morty" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="container mx-auto flex flex-col items-center justify-center min-h-screen p-4">
+      <Header />
+
+      <main className="container mx-auto flex flex-col items-center justify-center p-4">
         <h1 className="text-5xl md:text-[5rem] leading-normal font-extrabold text-gray-700">
-          Rick&apos;n Morty Info App
+          Rick&apos;n Morty App
         </h1>
 
         <p className="text-2xl text-gray-700">

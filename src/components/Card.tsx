@@ -1,6 +1,6 @@
 type CardProps = {
   name: string
-  description: string
+  description?: string
   content?: string | React.ReactNode
   onClick?: () => void
 }
@@ -12,7 +12,10 @@ const Card = ({ name, description, content, onClick }: CardProps) => {
       className="flex flex-col justify-center p-6 duration-500 border-2 border-gray-500 rounded shadow-xl motion-safe:hover:scale-105 cursor-pointer"
     >
       <h2 className="text-lg text-gray-700">{name}</h2>
-      <p className="mt-5 text-sm text-gray-600">{description}</p>
+
+      {description && (
+        <p className="mt-5 text-sm text-gray-600">{description}</p>
+      )}
 
       {content}
     </section>
