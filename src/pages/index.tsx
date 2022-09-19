@@ -30,7 +30,10 @@ const Home: NextPage = () => {
           Please select card to navigate to page
         </p>
 
-        <div className="grid gap-3 pt-3 mt-5 text-center md:grid-cols-3 lg:w-2/3">
+        <div
+          className="grid gap-3 pt-3 mt-5 text-center md:grid-cols-3 lg:w-2/3"
+          data-testid="card-wrapper"
+        >
           <Card
             name="Character Overview"
             description="Dive into your favorite characters"
