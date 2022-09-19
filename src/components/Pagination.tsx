@@ -22,7 +22,7 @@ const Pagination = ({ onNext, onPrev, current, pages }: PaginationProps) => {
 
         <li className="page-item">
           <a
-            className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+            className="w-24 text-center page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
             href="#"
           >
             {current} / {pages}
