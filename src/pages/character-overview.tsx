@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/client"
 import type { NextPage } from "next"
 import Image from "next/image"
+import { useRouter } from "next/router"
 import { useState } from "react"
 import Card from "../components/Card"
 import Header from "../components/Header"
@@ -16,7 +17,11 @@ const CharacterOverview: NextPage = () => {
     },
   })
 
-  console.log(data)
+  const router = useRouter()
+
+  function navigateTo(url: string): void {
+    router.push(url)
+  }
 
   return (
     <>
@@ -27,12 +32,19 @@ const CharacterOverview: NextPage = () => {
         onPrev={() => setCurrentPage(currentPage === 1 ? 1 : currentPage - 1)}
         onNext={() =>
           setCurrentPage(
-            currentPage === data?.info?.pages ? currentPage : currentPage + 1
+            currentPage === data?.characters?.info?.pages
+              ? currentPage
+              : currentPage + 1
           )
         }
+        pages={data?.characters?.info?.pages}
       />
 
-      {loading && <Spinner />}
+      {loading && (
+        <div className="pt-3 mt-5">
+          <Spinner />
+        </div>
+      )}
 
       {!loading && (
         <div className="container mx-auto grid gap-3 pt-3 mt-5 text-center md:grid-cols-3 lg:w-2/3">
@@ -42,14 +54,16 @@ const CharacterOverview: NextPage = () => {
                 key={char.id}
                 name={char.name}
                 content={
-                  <Image
-                    className="mt-5"
-                    src={char.image}
-                    alt={`profile image of ${char.name}`}
-                    height={200}
-                    width={200}
-                  />
+                  <div className="mt-5">
+                    <Image
+                      src={char.image}
+                      alt={`profile image of ${char.name}`}
+                      height={200}
+                      width={200}
+                    />
+                  </div>
                 }
+                onClick={() => navigateTo(`/character/${char.id}`)}
               />
             )
           })}
