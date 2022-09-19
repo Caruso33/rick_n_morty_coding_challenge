@@ -8,19 +8,23 @@ const Header = () => {
   return (
     <nav className="relative px-4 py-4 flex justify-between items-center bg-white">
       <Link className="text-3xl font-bold leading-none" href="/">
-        <Image
-          height={80}
-          width={300}
-          src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Rick_and_Morty.svg"
-          alt="rick and morty svg logo"
-        />
+        <a>
+          <Image
+            height={80}
+            width={300}
+            src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Rick_and_Morty.svg"
+            alt="rick and morty svg logo"
+          />
+        </a>
       </Link>
 
       <ul className="flex items-center space-x-6 mr-6">
         <li className="cursor-pointer">
           <Link className="text-sm text-gray-400 hover:text-gray-500" href="/">
             {/* Home */}
-            <AiFillHome className="text-3xl" />
+            <a>
+              <AiFillHome className="text-3xl" />
+            </a>
           </Link>
         </li>
 
@@ -47,7 +51,9 @@ const Header = () => {
             href="/character-overview"
           >
             {/* Character Overview */}
-            <GiPlagueDoctorProfile className="text-3xl" />
+            <a>
+              <GiPlagueDoctorProfile className="text-3xl" />
+            </a>
           </Link>
         </li>
         {/* <li className="text-gray-300">
