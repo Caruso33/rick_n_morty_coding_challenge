@@ -4,9 +4,10 @@ type PaginationProps = {
   onNext: () => void
   onPrev: () => void
   current: number
+  pages?: number
 }
 
-const Pagination = ({ onNext, onPrev, current }: PaginationProps) => {
+const Pagination = ({ onNext, onPrev, current, pages }: PaginationProps) => {
   return (
     <div className="flex justify-center">
       <ul className="flex items-center list-style-none">
@@ -24,7 +25,7 @@ const Pagination = ({ onNext, onPrev, current }: PaginationProps) => {
             className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
             href="#"
           >
-            {current}
+            {current} / {pages}
           </a>
         </li>
 
