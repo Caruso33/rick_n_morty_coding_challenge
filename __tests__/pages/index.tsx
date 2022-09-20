@@ -1,12 +1,6 @@
-import { render, screen, fireEvent } from "@testing-library/react"
+import { fireEvent, render, screen } from "@testing-library/react"
 import Home from "../../src/pages"
-import { createMockRouter } from "../../src/test-utils/createMockRouter"
-import { RouterContext } from "next/dist/shared/lib/router-context"
-
-import { useRouter } from "next/router"
 import { renderWithRouter } from "../../src/test-utils/render"
-
-// const useRouter = jest.spyOn(Router, "useRouter")
 
 describe("index.tsx", () => {
   it("renders the <Header />, Heading, Info and Cards", async () => {
@@ -29,19 +23,7 @@ describe("index.tsx", () => {
     expect(cardWrapper.childNodes.length).toBe(1)
   })
 
-  it("navigates to pages on card click", async () => {
-    // const router = createMockRouter({
-    //   query: {},
-    //   pathname: "/",
-    //   basePath: "/",
-    // })
-
-    // render(
-    //   <RouterContext.Provider value={router}>
-    //     <Home />
-    //   </RouterContext.Provider>
-    // )
-
+  it("navigates to overview page on card click", async () => {
     const { router } = renderWithRouter(<Home />)
 
     const overviewCard = screen.getByText("Character Overview")
