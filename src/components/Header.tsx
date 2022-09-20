@@ -4,9 +4,10 @@ import { GiPlagueDoctorProfile } from "react-icons/gi"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 import { AiFillHome } from "react-icons/ai"
-import { apolloClient } from "src/pages/_app"
+import apolloClient from "src/utils/apollo"
 import { CREATE_USER, GET_USERS_USERNAME } from "src/utils/graphql"
 import Spinner from "./Spinner"
+import { getUser } from "src/utils/apiCalls"
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -38,23 +39,13 @@ const Header = () => {
 
     try {
       setLoading(true)
-      const { data: getUserData } = await apolloClient.query({
-        query: GET_USERS_USERNAME,
-        variables: {
-          username,
-        },
-        context: { clientName: "hasura" },
-      })
 
-      if (getUserData?.users?.length !== 0) {
-        console.log("Found user, using it")
+      const { getUserData, errors: getUserErrors } = await getUser(
+        username,
+        () => setIsLoggedIn(true)
+      )
 
-        const { __typename, ...userFields } = getUserData?.users?.[0]
-        if (userFields) {
-          localStorage.setItem("user-data", JSON.stringify(userFields))
-          setIsLoggedIn(true)
-        }
-      } else {
+      if (getUserData?.users?.length === 0) {
         console.log("No user with this Username found. Creating new user...")
 
         const { data: createUserData } = await apolloClient.query({

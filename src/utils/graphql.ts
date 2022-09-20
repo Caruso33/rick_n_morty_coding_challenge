@@ -69,7 +69,7 @@ export const CREATE_USER = gql`
 `
 
 export const UPDATE_USER = gql`
-  mutation UpdateUser($username: String, $favoriteChars: String) {
+  mutation UpdateUser($username: String, $favoriteChars: _int4) {
     update_users(
       where: { username: { _eq: $username } }
       _set: { favorite_chars: $favoriteChars }

@@ -9,7 +9,7 @@ type PaginationProps = {
 
 const Pagination = ({ onNext, onPrev, current, pages }: PaginationProps) => {
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center" data-testid="pagination">
       <ul className="flex items-center list-style-none">
         <li className="page-item" onClick={onPrev}>
           <a
