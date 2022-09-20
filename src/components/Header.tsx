@@ -2,9 +2,87 @@ import Link from "next/link"
 import { GiPlagueDoctorProfile } from "react-icons/gi"
 // import { MdLocalMovies } from "react-icons/md"
 import Image from "next/image"
+import { useEffect, useState } from "react"
 import { AiFillHome } from "react-icons/ai"
+import { apolloClient } from "src/pages/_app"
+import { CREATE_USER, GET_USERS_USERNAME } from "src/utils/graphql"
+import Spinner from "./Spinner"
 
 const Header = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [username, setUsername] = useState("")
+
+  const [loading, setLoading] = useState(false)
+  const [hasError, setHasError] = useState(false)
+
+  useEffect(() => {
+    // check if localStorage user exists
+    const userData =
+      typeof window !== "undefined" && localStorage.getItem("user-data")
+
+    if (userData) {
+      console.log("Found local user data, using it")
+      setUsername(JSON.parse(userData)?.username)
+      setIsLoggedIn(true)
+    }
+  }, [])
+
+  async function onLogin() {
+    if (!username) {
+      setHasError(true)
+      return
+    }
+
+    setHasError(false)
+    console.log("Checking users in db with this username...")
+
+    try {
+      setLoading(true)
+      const { data: getUserData } = await apolloClient.query({
+        query: GET_USERS_USERNAME,
+        variables: {
+          username,
+        },
+        context: { clientName: "hasura" },
+      })
+
+      if (getUserData?.users?.length !== 0) {
+        console.log("Found user, using it")
+
+        const { __typename, ...userFields } = getUserData?.users?.[0]
+        if (userFields) {
+          localStorage.setItem("user-data", JSON.stringify(userFields))
+          setIsLoggedIn(true)
+        }
+      } else {
+        console.log("No user with this Username found. Creating new user...")
+
+        const { data: createUserData } = await apolloClient.query({
+          query: CREATE_USER,
+          variables: {
+            username,
+          },
+          context: { clientName: "hasura" },
+        })
+
+        const { __typename, ...userFields } = createUserData?.insert_users_one
+        if (userFields) {
+          localStorage.setItem("user-data", JSON.stringify(userFields))
+          setIsLoggedIn(true)
+        }
+      }
+    } catch (e: any) {
+      console.error(`Something went wrong logging in: ${e.message}`)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  function onLogout() {
+    localStorage.removeItem("user-data")
+    setIsLoggedIn(false)
+  }
+
   return (
     <nav
       className="relative px-4 py-4 flex justify-between items-center bg-white"
@@ -82,6 +160,51 @@ const Header = () => {
           </a>
         </li> */}
       </ul>
+
+      <div className="w-64">
+        {!isLoggedIn ? (
+          <div className="flex justify-between border-2 border-gray-500 rounded shadow-xl p-3 mr-6">
+            <input
+              type="text"
+              className={`w-full mr-2 border-2 outline-none focus:outline-none focus:border-gray-300 ${
+                hasError ? "border-rose-600" : ""
+              }`}
+              placeholder="Username"
+              value={username}
+              onChange={(e) => {
+                setHasError(false)
+                setUsername(e.target.value)
+              }}
+            />
+
+            <button
+              className="rounded-full px-2 py-1 text-white bg-gray-500 hover:bg-gray-700 hover:shadow-lg focus:bg-gray-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-800 active:shadow-lg transition duration-150 ease-in-out"
+              onClick={onLogin}
+              disabled={loading}
+            >
+              {loading ? (
+                <Spinner innerClassName="w-4 h-4 border-white" />
+              ) : (
+                "Login"
+              )}
+            </button>
+          </div>
+        ) : (
+          <div className="mr-6 flex justify-end">
+            <button
+              className="rounded-full px-2 py-1 text-white bg-gray-500 hover:bg-gray-700 hover:shadow-lg focus:bg-gray-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-800 active:shadow-lg transition duration-150 ease-in-out"
+              onClick={onLogout}
+              disabled={loading}
+            >
+              {loading ? (
+                <Spinner innerClassName="w-4 h-4 border-white" />
+              ) : (
+                `Logout ${username}`
+              )}
+            </button>
+          </div>
+        )}
+      </div>
     </nav>
   )
 }

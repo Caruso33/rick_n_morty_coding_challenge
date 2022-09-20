@@ -227,8 +227,23 @@ Here are some resources that we commonly refer to:
 
 - [Protecting routes with Next-Auth.js](https://next-auth.js.org/configuration/nextjs#unstable_getserversession)
 
+## coding challenge
+
+https://gist.github.com/rechenberger/2b11fc22730efdd0513272b153bf9311
+
 ## To consider
 
 - Graphql query
   - char overview: number of episodes based on episode { id } -> DB Load?
   - serversideprops vs clientside fetching?
+
+## Todo
+
+- github action
+- vercel deployment
+- e2e testing
+- hasura integration / favorite char
+- hasura auth
+- episode card / overview + detail screen
+- extend testing
+- serversideprops?

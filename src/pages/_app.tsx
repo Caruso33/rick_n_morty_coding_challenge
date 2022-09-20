@@ -1,15 +1,11 @@
-import "../styles/globals.css"
+import { ApolloProvider } from "@apollo/client"
 import type { AppType } from "next/dist/shared/lib/utils"
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client"
-
-const client = new ApolloClient({
-  uri: "https://rickandmortyapi.com/graphql",
-  cache: new InMemoryCache(),
-})
+import apolloClient from "src/utils/apollo"
+import "../styles/globals.css"
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
-    <ApolloProvider client={client}>
+    <ApolloProvider client={apolloClient}>
       <Component {...pageProps} />
     </ApolloProvider>
   )
