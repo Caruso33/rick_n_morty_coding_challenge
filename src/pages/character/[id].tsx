@@ -75,15 +75,15 @@ const CharacterDetail = () => {
               {isFavorite ? <FaStar /> : <FaRegStar />}
             </button>
           )}
-          <div className="text-2xl italic mt-3">Name</div>{" "}
+          <div className="text-2xl italic mt-3">Name</div>
           <div className="text-md">{name}</div>
-          <div className="text-2xl italic mt-3">Gender</div>{" "}
+          <div className="text-2xl italic mt-3">Gender</div>
           <div className="text-md">{gender}</div>
-          <div className="text-2xl italic mt-3">Species</div>{" "}
+          <div className="text-2xl italic mt-3">Species</div>
           <div className="text-md">{species}</div>
-          <div className="text-2xl italic mt-3">Status</div>{" "}
+          <div className="text-2xl italic mt-3">Status</div>
           <div className="text-md">{status}</div>
-          <div className="text-2xl italic mt-3">Location</div>{" "}
+          <div className="text-2xl italic mt-3">Location</div>
           <div className="text-md">{location?.name}</div>
           <div className="text-xl mt-5">
             Appeared in {episodes.length} episode(s)

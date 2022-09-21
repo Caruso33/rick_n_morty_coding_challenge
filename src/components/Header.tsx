@@ -1,11 +1,11 @@
 import Link from "next/link"
 import { GiPlagueDoctorProfile } from "react-icons/gi"
-// import { MdLocalMovies } from "react-icons/md"
+import { MdLocalMovies } from "react-icons/md"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 import { AiFillHome } from "react-icons/ai"
 import apolloClient from "src/utils/apollo"
-import { CREATE_USER, GET_USERS_USERNAME } from "src/utils/graphql"
+import { CREATE_USER } from "src/utils/graphql"
 import Spinner from "./Spinner"
 import { getUser } from "src/utils/apiCalls"
 
@@ -101,20 +101,7 @@ const Header = () => {
         </li>
 
         <li className="text-gray-300">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            stroke="currentColor"
-            className="w-4 h-4 current-fill"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
-            />
-          </svg>
+          <Separator />
         </li>
 
         <li className="cursor-pointer">
@@ -128,28 +115,22 @@ const Header = () => {
             </a>
           </Link>
         </li>
-        {/* <li className="text-gray-300">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            stroke="currentColor"
-            className="w-4 h-4 current-fill"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
-            />
-          </svg>
+
+        <li className="text-gray-300">
+          <Separator />
         </li>
+
         <li>
-          <a className="text-sm text-gray-400 hover:text-gray-500" href="#">
-            Episode Overview
-            <MdLocalMovies />
-          </a>
-        </li> */}
+          <Link
+            className="text-sm text-blue-600 font-bold"
+            href="/episode-overview"
+          >
+            <a>
+              {/* Episode Overview */}
+              <MdLocalMovies className="text-3xl" />
+            </a>
+          </Link>
+        </li>
       </ul>
 
       <div className="w-64">
@@ -173,11 +154,7 @@ const Header = () => {
               onClick={onLogin}
               disabled={loading}
             >
-              {loading ? (
-                <Spinner borderColor="border-white-200" />
-              ) : (
-                "Login"
-              )}
+              {loading ? <Spinner borderColor="border-white-200" /> : "Login"}
             </button>
           </div>
         ) : (
@@ -201,3 +178,22 @@ const Header = () => {
 }
 
 export default Header
+
+function Separator() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      stroke="currentColor"
+      className="w-4 h-4 current-fill"
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+      />
+    </svg>
+  )
+}

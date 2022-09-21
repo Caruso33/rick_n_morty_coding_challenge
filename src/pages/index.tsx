@@ -31,13 +31,19 @@ const Home: NextPage = () => {
         </p>
 
         <div
-          className="grid gap-3 pt-3 mt-5 text-center md:grid-cols-3 lg:w-2/3"
+          className="flex justify-between gap-12 pt-3 mt-12 text-center md:grid-cols-3 lg:w-2/3"
           data-testid="card-wrapper"
         >
           <Card
             name="Character Overview"
             description="Dive into your favorite characters"
             onClick={() => navigateTo("/character-overview")}
+          />
+
+          <Card
+            name="Episode Overview"
+            description="See all episodes"
+            onClick={() => navigateTo("/episode-overview")}
           />
         </div>
       </main>

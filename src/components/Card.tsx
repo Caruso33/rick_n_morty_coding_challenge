@@ -1,7 +1,7 @@
 import { FaStar, FaRegStar } from "react-icons/fa"
 
 type CardProps = {
-  id: string
+  id?: string
   name: string
   description?: string
   content?: string | React.ReactNode
@@ -35,6 +35,8 @@ const Card = ({
               : "text-gray-500 hover:text-yellow-500"
           }`}
           onClick={(e) => {
+            if (!id) return
+
             e.stopPropagation()
             onFavoriteClick && onFavoriteClick(id)
           }}
