@@ -1,12 +1,12 @@
 type SpinnerProps = {
-  innerClassName?: string
+  borderColor?: string
 }
 
-const Spinner = ({ innerClassName = "" }: SpinnerProps) => {
+const Spinner = ({ borderColor = "border-gray-900" }: SpinnerProps) => {
   return (
     <div className="flex items-center justify-center" data-testid="spinner">
       <div
-        className={`w-8 h-8 border-b-2 border-gray-900 rounded-full animate-spin ${innerClassName}`}
+        className={`w-8 h-8 border-b-2 rounded-full animate-spin ${borderColor}`}
       ></div>
     </div>
   )

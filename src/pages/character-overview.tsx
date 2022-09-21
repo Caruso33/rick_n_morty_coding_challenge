@@ -3,13 +3,12 @@ import type { NextPage } from "next"
 import Image from "next/image"
 import { useRouter } from "next/router"
 import { useState } from "react"
-import { getUser } from "src/utils/apiCalls"
-import apolloClient from "src/utils/apollo"
+import { updateUser } from "src/utils/apiCalls"
 import Card from "../components/Card"
 import Header from "../components/Header"
 import Pagination from "../components/Pagination"
 import Spinner from "../components/Spinner"
-import { GET_CHARACTERS, UPDATE_USER } from "../utils/graphql"
+import { GET_CHARACTERS } from "../utils/graphql"
 
 const CharacterOverview: NextPage = () => {
   const [currentPage, setCurrentPage] = useState(1)
@@ -32,39 +31,11 @@ const CharacterOverview: NextPage = () => {
   }
 
   async function onFavoriteClick(charId: string) {
-    if (!userData || !charId) {
-      return
-    }
-
     setUpdating(true)
 
-    console.log("Updating favorite Characters...")
-    try {
-      const newFavorites = favoriteCharacters.includes(+charId)
-        ? favoriteCharacters.filter((id: number) => id !== +charId)
-        : [...favoriteCharacters, +charId]
+    await updateUser(charId)
 
-      const { errors } = await apolloClient.query({
-        query: UPDATE_USER,
-        variables: {
-          username: JSON.parse(userData)?.username,
-          // postgres list of integers have to be wrapped inside '{ }' not '[ ]'
-          favoriteChars: `{${newFavorites.join()}}`,
-        },
-        context: { clientName: "hasura" },
-      })
-      if (errors) throw Error(errors?.[0]?.message)
-
-      const { errors: getUserErrors } = await getUser(
-        JSON.parse(userData)?.username
-      )
-
-      if (getUserErrors) throw Error(getUserErrors?.[0]?.message)
-    } catch (e: any) {
-      console.error(`Updating favorite Characters failed: ${e.message}`)
-    } finally {
-      setUpdating(false)
-    }
+    setUpdating(false)
   }
 
   return (
@@ -100,7 +71,7 @@ const CharacterOverview: NextPage = () => {
               <Card
                 key={char.id}
                 id={char.id}
-                isFavorite={favoriteCharacters.includes(+char.id)}
+                isFavorite={favoriteCharacters?.includes(+char.id)}
                 name={char.name}
                 content={
                   <div className="mt-5">

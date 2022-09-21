@@ -29,7 +29,7 @@ const Card = ({
     >
       {typeof isFavorite == "boolean" && (
         <button
-          className={`absolute top-3 right-3 text-2xl shadow-xl motion-safe:hover:scale-150 hover:border-2 hover:rounded ${
+          className={`absolute top-3 right-3 text-2xl motion-safe:hover:scale-150 hover:border-2 hover:rounded ${
             isFavorite
               ? "text-yellow-500 hover:text-gray-500"
               : "text-gray-500 hover:text-yellow-500"

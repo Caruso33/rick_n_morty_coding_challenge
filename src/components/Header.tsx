@@ -174,7 +174,7 @@ const Header = () => {
               disabled={loading}
             >
               {loading ? (
-                <Spinner innerClassName="w-4 h-4 border-white" />
+                <Spinner borderColor="border-white-200" />
               ) : (
                 "Login"
               )}
@@ -188,7 +188,7 @@ const Header = () => {
               disabled={loading}
             >
               {loading ? (
-                <Spinner innerClassName="w-4 h-4 border-white" />
+                <Spinner borderColor="border-white-200" />
               ) : (
                 `Logout ${username}`
               )}
