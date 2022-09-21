@@ -3,6 +3,7 @@ import Head from "next/head"
 import { useRouter } from "next/router"
 import Card from "../components/Card"
 import Header from "../components/Header"
+import Image from "next/image"
 
 const Home: NextPage = () => {
   const router = useRouter()
@@ -37,12 +38,44 @@ const Home: NextPage = () => {
           <Card
             name="Character Overview"
             description="Dive into your favorite characters"
+            content={
+              <div className="mt-5">
+                {Array.from({ length: 5 })
+                  .map((_, i) => i + 1)
+                  .map((i) => {
+                    const url =
+                      "https://rickandmortyapi.com/api/character/avatar/"
+                    const suffix = ".jpeg"
+                    const imageUri = `${url}${i}${suffix}`
+
+                    return (
+                      <Image
+                        key={imageUri}
+                        src={imageUri}
+                        alt={`profile image of ${imageUri}`}
+                        height={50}
+                        width={50}
+                      />
+                    )
+                  })}
+              </div>
+            }
             onClick={() => navigateTo("/character-overview")}
           />
 
           <Card
             name="Episode Overview"
             description="See all episodes"
+            content={
+              <div className="flex mt-5">
+                {[
+                  "Pilot (S01E01)",
+                  "Lawnmover Dog (S01E02)",
+                  "Anatomy Park (S01E03)",
+                ].join(", ")}
+                ...
+              </div>
+            }
             onClick={() => navigateTo("/episode-overview")}
           />
         </div>
