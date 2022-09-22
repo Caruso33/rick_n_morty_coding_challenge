@@ -3,9 +3,9 @@ import Image from "next/image"
 import { useRouter } from "next/router"
 import { useState } from "react"
 import { FaRegStar, FaStar } from "react-icons/fa"
-import { updateUser } from "src/utils/apiCalls"
 import Header from "../../components/Header"
 import Spinner from "../../components/Spinner"
+import { updateUser } from "../../utils/apiCalls"
 import { GET_CHARACTER } from "../../utils/graphql"
 
 const CharacterDetail = () => {

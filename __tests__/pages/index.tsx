@@ -20,10 +20,10 @@ describe("index.tsx", () => {
     const overviewCard = screen.getByText("Character Overview")
     expect(cardWrapper).toBeInTheDocument()
     expect(cardWrapper).toContainElement(overviewCard)
-    expect(cardWrapper.childNodes.length).toBe(1)
+    expect(cardWrapper.childNodes.length).toBe(2)
   })
 
-  it("navigates to overview page on card click", async () => {
+  it("navigates to character overview page on card click", async () => {
     const { router } = renderWithRouter(<Home />)
 
     const overviewCard = screen.getByText("Character Overview")
@@ -31,5 +31,15 @@ describe("index.tsx", () => {
     fireEvent.click(overviewCard)
 
     expect(router.push).toHaveBeenCalledWith("/character-overview")
+  })
+
+  it("navigates to episode overview page on card click", async () => {
+    const { router } = renderWithRouter(<Home />)
+
+    const overviewCard = screen.getByText("Episode Overview")
+
+    fireEvent.click(overviewCard)
+
+    expect(router.push).toHaveBeenCalledWith("/episode-overview")
   })
 })

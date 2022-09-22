@@ -50,7 +50,7 @@ const EpisodeOverview: NextPage = () => {
       {!loading && (
         <div
           className="container mx-auto grid gap-3 pt-3 mt-5 text-center md:grid-cols-3 lg:w-2/3"
-          data-testid="character-card-wrapper"
+          data-testid="episode-card-wrapper"
         >
           {data?.episodes?.results?.map((episode: Record<string, any>) => {
             return (

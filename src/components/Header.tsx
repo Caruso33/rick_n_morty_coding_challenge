@@ -1,13 +1,13 @@
-import Link from "next/link"
-import { GiPlagueDoctorProfile } from "react-icons/gi"
-import { MdLocalMovies } from "react-icons/md"
 import Image from "next/image"
+import Link from "next/link"
 import { useEffect, useState } from "react"
 import { AiFillHome } from "react-icons/ai"
-import apolloClient from "src/utils/apollo"
-import { CREATE_USER } from "src/utils/graphql"
+import { GiPlagueDoctorProfile } from "react-icons/gi"
+import { MdLocalMovies } from "react-icons/md"
+import { getUser } from "../utils/apiCalls"
+import apolloClient from "../utils/apollo"
+import { CREATE_USER } from "../utils/graphql"
 import Spinner from "./Spinner"
-import { getUser } from "src/utils/apiCalls"
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)

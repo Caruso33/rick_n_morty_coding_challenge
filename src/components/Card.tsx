@@ -1,8 +1,8 @@
 import { FaStar, FaRegStar } from "react-icons/fa"
 
 type CardProps = {
-  id?: string
   name: string
+  id?: string
   description?: string
   content?: string | React.ReactNode
   isFavorite?: boolean | null
@@ -12,8 +12,8 @@ type CardProps = {
 }
 
 const Card = ({
-  id,
   name,
+  id,
   description,
   content,
   isFavorite,

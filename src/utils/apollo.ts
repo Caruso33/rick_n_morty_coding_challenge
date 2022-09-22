@@ -1,3 +1,4 @@
+import fetch from "cross-fetch"
 import {
   ApolloClient,
   InMemoryCache,
@@ -19,6 +20,7 @@ const defaultOptions: DefaultOptions = {
 
 const rickMortyLink = new HttpLink({
   uri: "https://rickandmortyapi.com/graphql",
+  fetch,
 })
 
 const hasuraLink = new HttpLink({
@@ -26,6 +28,7 @@ const hasuraLink = new HttpLink({
   headers: {
     "x-hasura-admin-secret": process.env.NEXT_PUBLIC_HASURA_ADMIN_SECRET,
   },
+  fetch,
 })
 
 const apolloClient = new ApolloClient({
@@ -36,6 +39,7 @@ const apolloClient = new ApolloClient({
   ),
   cache: new InMemoryCache(),
   defaultOptions,
+  ssrMode: true,
 })
 
 export default apolloClient
