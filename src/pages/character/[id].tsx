@@ -25,7 +25,8 @@ const CharacterDetail = () => {
     typeof window !== "undefined" && localStorage.getItem("user-data")
   const favoriteCharacters = userData && JSON.parse(userData)?.favorite_chars
 
-  const isFavorite = favoriteCharacters?.includes(id && +id)
+  const isFavorite =
+    favoriteCharacters && favoriteCharacters?.includes(id && +id)
 
   async function onFavoriteClick() {
     if (!id) return

@@ -40,10 +40,7 @@ const Header = () => {
     try {
       setLoading(true)
 
-      const { getUserData, errors: getUserErrors } = await getUser(
-        username,
-        () => setIsLoggedIn(true)
-      )
+      const { getUserData } = await getUser(username, () => setIsLoggedIn(true))
 
       if (getUserData?.users?.length === 0) {
         console.log("No user with this Username found. Creating new user...")
@@ -56,12 +53,14 @@ const Header = () => {
           context: { clientName: "hasura" },
         })
 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { __typename, ...userFields } = createUserData?.insert_users_one
         if (userFields) {
           localStorage.setItem("user-data", JSON.stringify(userFields))
           setIsLoggedIn(true)
         }
       }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
       console.error(`Something went wrong logging in: ${e.message}`)
     } finally {

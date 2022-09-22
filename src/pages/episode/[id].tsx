@@ -51,6 +51,7 @@ const EpisodeDetail = () => {
           </div>
           <div className="text-xl mt-5">
             {characters
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               .map((char: Record<string, any>) => char.name)
               .join(", ")}
           </div>

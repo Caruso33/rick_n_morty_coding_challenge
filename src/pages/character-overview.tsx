@@ -66,6 +66,7 @@ const CharacterOverview: NextPage = () => {
           className="container mx-auto grid gap-3 pt-3 mt-5 text-center md:grid-cols-3 lg:w-2/3"
           data-testid="character-card-wrapper"
         >
+          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
           {data?.characters?.results?.map((char: Record<string, any>) => {
             return (
               <Card

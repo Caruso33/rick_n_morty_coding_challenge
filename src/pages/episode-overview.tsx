@@ -1,9 +1,7 @@
 import { useQuery } from "@apollo/client"
 import type { NextPage } from "next"
-import Image from "next/image"
 import { useRouter } from "next/router"
 import { useState } from "react"
-import { updateUser } from "src/utils/apiCalls"
 import Card from "../components/Card"
 import Header from "../components/Header"
 import Pagination from "../components/Pagination"
@@ -52,6 +50,7 @@ const EpisodeOverview: NextPage = () => {
           className="container mx-auto grid gap-3 pt-3 mt-5 text-center md:grid-cols-3 lg:w-2/3"
           data-testid="episode-card-wrapper"
         >
+          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
           {data?.episodes?.results?.map((episode: Record<string, any>) => {
             return (
               <Card

@@ -13,6 +13,7 @@ export async function getUser(username: string, onSuccess?: () => void) {
   if (getUserData?.users?.length !== 0) {
     console.log("Found user")
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { __typename, ...userFields } = getUserData?.users?.[0]
     if (userFields) {
       localStorage.setItem("user-data", JSON.stringify(userFields))
